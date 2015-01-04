@@ -1,0 +1,98 @@
+<?page title="Users List" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="userList" border="none" height="80%" width="96%"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('ru.javarush.winter2014.zkoss.UserListVM')">
+		<separator />
+		<separator />
+		<div width="100%">
+			<div sclass="sectionTitle">
+				<separator />
+				<label value="Users" sclass="sectionTitleLabel" />
+				<separator />
+			</div>
+			<div style="float:right">
+				<button label="Add New" onClick="@command('onAddNew')"
+					mold="trendy" sclass="mybutton button blue small" />
+			</div>
+			<div style="clear: both;"></div>
+			<div sclass="sectionSeperator"></div>
+		</div>
+		<separator />
+		<listbox id="" mold="paging" pageSize="11" pagingPosition="top"
+			sclass="mylist" selectedItem="@bind(vm.selectedItem)"
+			model="@load(vm.dataSet)">
+			<auxhead>
+				<auxheader colspan="1">
+					<image sclass="fImageFilter" />
+					<textbox id="filterName" cols="30" mold="rounded"
+						value="@bind(vm.dataFilter.name)" instant="true" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image sclass="fImageFilter" />
+					<intbox id="filterAge"
+						value="@bind(vm.dataFilter.age)" maxlength="3" mold="rounded"
+						hflex="1" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image sclass="fImageFilter" />
+					<checkbox id="filterAdmin"
+						checked="@bind(vm.dataFilter.admin)" />
+				</auxheader>
+				<auxheader colspan="1">
+					<image sclass="fImageFilter" />
+					<datebox id="filterStartDate" cols="12"
+						format="short" value="@bind(vm.dataFilter.startDate)" />
+					<label value=" - " />
+					<datebox id="filterEndDate" cols="12" format="short"
+						value="@bind(vm.dataFilter.endDate)" />
+				</auxheader>
+				<auxheader colspan="1">
+					<hbox spacing="20px">
+						<image onClick="@command('doFilter')"
+							sclass="fimageApplyFilter" tooltiptext="Apply filter">
+						</image>
+						<image onClick="@command('doClearFilter')"
+							sclass="fimageClearFilter" tooltiptext="Clear filter">
+						</image>
+					</hbox>
+				</auxheader>
+			</auxhead>
+			<listhead sizable="true">
+				<listheader label="Name" sortDirection="ascending"
+					sort="auto(name)" />
+				<listheader label="Age" sort="auto(age)" />
+				<listheader label="Admin" sort="auto(admin)" />
+				<listheader label="Create date" sort="auto(createDate)" />
+				<listheader label="Action" />
+			</listhead>
+			<template name="model" var="p1">
+				<listitem>
+					<listcell label="@load(p1.name)" />
+					<listcell label="@load(p1.age)" />
+					<listcell><!--  label="@load(p1.admin)" -->
+						<image sclass="fimagecheck" visible="@load(p1.admin eq true)"/>
+					</listcell>
+					<listcell
+						label="@load(p1.createDate) @converter('formatedDate',format='dd/MM/yyyy')" />
+					<listcell>
+						<hbox spacing="20px">
+							<image
+								onClick="@command('onEdit',userRecord=p1)" sclass="fimageedit"
+								tooltiptext="To Edit the user details">
+							</image>
+							<image
+								onClick="@command('openAsReadOnly',userRecord=p1)"
+								sclass="fimageView" tooltiptext="To view the user details">
+							</image>
+							<image
+								onClick="@command('onDelete',userRecord=p1)"
+								sclass="fimageDelete" tooltiptext="To Delete the user ">
+							</image>
+						</hbox>
+					</listcell>
+				</listitem>
+			</template>
+		</listbox>
+	</window>
+</zk>

@@ -1,0 +1,114 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+
+	<window id="userCRUD" border="none"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('ru.javarush.winter2014.zkoss.UserCRUDVM')">
+		<div
+			form="@id('fx') @load(vm.selectedRecord) @save(vm.selectedRecord, before='saveThis')">
+
+			<div width="96%">
+				<span width="100%">
+					<div sclass="sectionTitle">
+						<separator />
+						<label id="lcaption" sclass="sectionTitleLabel"
+							value="Add/Edit Users" />
+						<label id="readonly" sclass="sectionTitleLabel"
+							value="(ReadOnly)" visible="@load(vm.makeAsReadOnly)" />
+						<image
+							src="@load(fxStatus.dirty?'images/unsaved32x32.png':'')" />
+
+					</div>
+				</span>
+				<div id="buttonsDiv"
+					style="float:right;margin-top:6px;">
+					<button label="Save and Close" mold="trendy"
+						visible="@load(not vm.makeAsReadOnly)"
+						onClick="@command('saveThis', action=0)"
+						sclass="mybutton button theme small">
+					</button>
+					<button label="Save and Add" mold="trendy"
+						visible="@load(not vm.makeAsReadOnly)"
+						onClick="@command('saveThis', action=1)"
+						sclass="mybutton button theme small">
+					</button>
+					<button
+						label="@load(vm.makeAsReadOnly ?'Close':'Cancel')" mold="trendy"
+						onClick="@command('cancel')"
+						sclass="mybutton button theme small">
+					</button>
+				</div>
+				<div style="clear: both;"></div>
+				<div sclass="sectionSeperator"></div>
+			</div>
+
+			<panel width="95%" sclass="sectionPanel">
+				<panelchildren>
+					<separator />
+					<grid sclass="vgrid">
+						<columns>
+							<column hflex="10%"></column>
+							<column hflex="10%"></column>
+							<column hflex="10%"></column>
+							<column hflex="10%"></column>
+						</columns>
+						<rows>
+							<row>
+								<vlayout>
+									<hlayout>
+										<label value="Name"
+											sclass="flabel" />
+										<label value="*"
+											sclass="flblreq" />
+									</hlayout>
+									<textbox id="name"
+										readonly="@load(vm.makeAsReadOnly)" mold="rounded" hflex="1"
+										value="@bind(fx.name)" />
+								</vlayout>
+								<vlayout>
+									<hlayout>
+										<label value="Age"
+											sclass="flabel" />
+										<label value="*"
+											sclass="flblreq" />
+									</hlayout>
+									<intbox id="age"
+										value="@bind(fx.age)" maxlength="3"
+										readonly="@load(vm.makeAsReadOnly)" mold="rounded" hflex="1"
+										constraint="no empty, no negative, no zero" />
+								</vlayout>
+								<vlayout>
+									<hlayout>
+										<label value="Admin"
+											sclass="flabel" />
+										<label value="*"
+											sclass="flblreq" />
+									</hlayout>
+									<checkbox id="admin"
+										checked="@bind(fx.admin)" />
+								</vlayout>
+								<vlayout>
+									<label value="Create date"
+										sclass="flabel" />
+									<datebox id="db0" cols="12"
+										format="short " onCreate="self.value = new Date()"
+										readonly="@load(vm.makeAsReadOnly)"
+										buttonVisible="@load(vm.makeAsReadOnly eq false)"
+										value="@bind(fx.createDate)" constraint="no empty" />
+								</vlayout>
+							</row>
+						</rows>
+					</grid>
+				</panelchildren>
+			</panel>
+			<separator />
+
+			<separator />
+			<span width="100%"></span>
+			<panel width="95%" sclass="sectionPanel"></panel>
+			<separator />
+			<span width="100%"></span>
+			<panel width="95%" sclass="sectionPanel"></panel>
+		</div>
+	</window>
+</zk>

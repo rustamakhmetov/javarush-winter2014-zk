@@ -12,6 +12,9 @@
            http://www.springframework.org/schema/tx
                    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
+	<import resource="classpath:applicationContext_hib.xml"/>
+	<import resource="classpath:springOrmContext.xml"/>
+
 	<!-- ====================================================== -->
 	<!-- Define the property placeholder configurer -->
 	<!-- ====================================================== -->

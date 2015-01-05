@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
 	<description><![CDATA[My ZK Application]]></description>
-	<display-name>ZKSample</display-name>
+	<display-name>ZK</display-name>
 
 	<filter>
 		<filter-name>hibernateFilter</filter-name>
@@ -23,14 +23,14 @@
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
-	<context-param>
+	<!--<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-                 	classpath:applicationContext.xml
-                    classpath:applicationContext_hib.xml
-                    classpath:springOrmContext.xml
-         </param-value>
-	</context-param>
+			classpath:WEB-INF/applicationContext.xml
+			classpath:applicationContext_hib.xml
+			classpath:springOrmContext.xml
+		</param-value>
+	</context-param>-->
 
 	<!-- Loads the Spring web application context -->
 	<listener>

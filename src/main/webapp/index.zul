@@ -1,5 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <zk>
-	<window apply="MyController" <!-- org.zkoss.bind.BindComposer -->
-		viewModel="@id('vm')@init('ru.javarush.winter2014.zkoss.IndexVM')">
+	<window apply="ru.javarush.winter2014.zkoss.MyController" viewModel="@id('vm')@init('ru.javarush.winter2014.zkoss.IndexVM')">
 	</window>
 </zk>
